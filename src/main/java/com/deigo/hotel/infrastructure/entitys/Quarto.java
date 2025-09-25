@@ -25,6 +25,6 @@ public class Quarto {
     private int capacidadeMaxima;
 
     @Column(name = "disponivel")
-    private Boolean disponivel;
+    private boolean disponivel;
 
 }

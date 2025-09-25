@@ -15,7 +15,7 @@ public class Hospede {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Integer id_hospede;
 
     @Column(name = "nome")
     private String nome;
@@ -33,5 +33,5 @@ public class Hospede {
     private String endereco;
 
     @Column(name = "vip")
-    private Boolean vip;
+    private boolean vip;
 }
