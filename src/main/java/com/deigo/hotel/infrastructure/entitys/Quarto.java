@@ -15,10 +15,8 @@ public class Quarto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @OneToMany(mappedBy = "quartoId")
     private Integer id_Quarto;
-
-    @Column(name = "quarto", unique = true)
-    private int quarto;
 
     @Column(name = "valorDiaria")
     private Double valorDiaria;

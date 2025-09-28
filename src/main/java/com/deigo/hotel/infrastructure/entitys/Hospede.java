@@ -15,6 +15,7 @@ public class Hospede {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @OneToOne(mappedBy = "hospedeId")
     private Integer id_hospede;
 
     @Column(name = "nome")

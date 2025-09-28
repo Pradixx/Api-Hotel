@@ -1,9 +1,7 @@
 package com.deigo.hotel.service;
 
 import com.deigo.hotel.infrastructure.entitys.Quarto;
-import com.deigo.hotel.infrastructure.repository.HospedeRepository;
 import com.deigo.hotel.infrastructure.repository.QuartoRepository;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -38,7 +36,6 @@ public class QuartoService {
 
         Quarto quartoAtualizado = Quarto.builder()
                 .id_Quarto(quarto.getId_Quarto())
-                .quarto(quarto.getQuarto())
                 .valorDiaria(quarto.getValorDiaria())
                 .capacidadeMaxima(quarto.getCapacidadeMaxima())
                 .disponivel(quarto.isDisponivel())
