@@ -1,9 +1,10 @@
 package com.deigo.hotel.infrastructure.entitys;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -19,20 +20,24 @@ public class Reserva {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id_reserva;
 
-    @Column(name = "quartoId")
-    private int quartoId;
+    @ManyToOne
+    @JoinColumn(name = "quarto_Id")
+    private Quarto quartoId;
 
-    @Column(name = "hospedeId")
-    private int hospedeId;
+    @ManyToOne
+    @JoinColumn(name = "hospede_Id")
+    private Hospede hospedeId;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     @Column(name = "dataEntrada")
-    private Date dataEntrada;
+    private LocalDate dataEntrada;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     @Column(name = "dataSaida")
-    private Date dataSaida;
+    private LocalDate dataSaida;
 
     @Column(name = "quantidadePessoas")
-    private int quantidadePessoas;
+    private Integer quantidadePessoas;
 
     @Column(name = "checkin")
     private boolean checkin;

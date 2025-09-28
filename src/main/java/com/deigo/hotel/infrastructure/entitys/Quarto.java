@@ -1,8 +1,6 @@
 package com.deigo.hotel.infrastructure.entitys;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Getter
@@ -14,6 +12,10 @@ import lombok.*;
 @Entity
 
 public class Quarto {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id_Quarto;
 
     @Column(name = "quarto", unique = true)
     private int quarto;
