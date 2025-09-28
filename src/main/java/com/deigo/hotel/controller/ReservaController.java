@@ -21,11 +21,11 @@ public class ReservaController {
 
     @GetMapping
     public ResponseEntity<Reserva> buscarReservaPorId (@RequestParam Integer id){
-        return ResponseEntity.ok(reservaService.burcarReservaPeloId(id));
+        return ResponseEntity.ok(reservaService.buscarReservaPeloId(id));
     }
 
     @DeleteMapping
-    public ResponseEntity<Void> DeletarReservaPorId (@RequestParam Integer id){
+    public ResponseEntity<Void> deletarReservaPorId (@RequestParam Integer id){
         reservaService.deletarReservaPeloId(id);
         return ResponseEntity.ok().build();
     }

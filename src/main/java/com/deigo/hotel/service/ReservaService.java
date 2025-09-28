@@ -1,6 +1,8 @@
 package com.deigo.hotel.service;
 
+import com.deigo.hotel.infrastructure.entitys.Quarto;
 import com.deigo.hotel.infrastructure.entitys.Reserva;
+import com.deigo.hotel.infrastructure.repository.QuartoRepository;
 import com.deigo.hotel.infrastructure.repository.ReservaRepository;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +13,25 @@ import java.time.temporal.ChronoUnit;
 public class ReservaService  {
 
     private final ReservaRepository repository;
+    private final QuartoRepository quartoRepository;
 
-    public ReservaService(ReservaRepository repository) {
+    public ReservaService(ReservaRepository repository, QuartoRepository quartoRepository) {
         this.repository = repository;
+        this.quartoRepository = quartoRepository;
+    }
+
+    private double calcularValorTotal(LocalDate dataEntrada, LocalDate dataSaida, Quarto quarto) {
+        if (dataEntrada.isAfter(dataSaida) || dataEntrada.isEqual(dataSaida)) {
+            throw new IllegalArgumentException("A data de saída deve ser posterior à data de entrada.");
+        }
+
+        long diasEstadia = ChronoUnit.DAYS.between(dataEntrada, dataSaida);
+        return diasEstadia * quarto.getValorDiaria();
+    }
+
+    private Quarto buscarQuarto(Integer quartoId) {
+        return quartoRepository.findById(quartoId)
+                .orElseThrow(() -> new RuntimeException("Quarto não encontrado com ID: " + quartoId));
     }
 
     //POST
@@ -22,7 +40,7 @@ public class ReservaService  {
     }
 
     //GET
-    public Reserva burcarReservaPeloId (Integer id) {
+    public Reserva buscarReservaPeloId (Integer id) {
         return repository.findById(id).orElseThrow(
                 () -> new RuntimeException("Id não encontrado"));
     }
@@ -37,12 +55,13 @@ public class ReservaService  {
         Reserva reservaEntity = repository.findById(id).orElseThrow(() ->
                 new RuntimeException("Reserva não encontrada"));
 
-        LocalDate dataEntrada = reserva.getDataEntrada() != null ? reserva.getDataEntrada() : reservaEntity.getDataEntrada();
-        LocalDate dataSaida = reserva.getDataSaida() != null ? reserva.getDataSaida() : reservaEntity.getDataSaida();
+        LocalDate novaDataEntrada = reserva.getDataEntrada() != null ? reserva.getDataEntrada() : reservaEntity.getDataEntrada();
+        LocalDate novaDataSaida = reserva.getDataSaida() != null ? reserva.getDataSaida() : reservaEntity.getDataSaida();
 
-        final double precoDiaria = 300.00;
-        long diasEstadia = ChronoUnit.DAYS.between(dataEntrada, dataSaida);
-        double valorTotal = diasEstadia * precoDiaria;
+        Integer QuartoId = reserva.getQuartoId() != null ? reserva.getQuartoId().getId_Quarto() : reservaEntity.getQuartoId().getId_Quarto();
+        Quarto quartoAtualizado = buscarQuarto(QuartoId);
+
+        double novoValorTotal = calcularValorTotal(novaDataEntrada, novaDataSaida, quartoAtualizado);
 
         Reserva reservaAtualizado = Reserva.builder()
                 .id_reserva(reserva.getId_reserva())
@@ -53,7 +72,7 @@ public class ReservaService  {
                 .quantidadePessoas(reserva.getQuantidadePessoas() != null ? reserva.getQuantidadePessoas() : reservaEntity.getQuantidadePessoas())
                 .checkin(reserva.isCheckin())
                 .checkout(reserva.isCheckout())
-                .valorTotal(valorTotal)
+                .valorTotal(novoValorTotal)
                 .build();
 
         repository.saveAndFlush(reservaAtualizado);
