@@ -1,7 +1,7 @@
-package com.deigo.hotel.service;
+﻿package com.deigo.hotel.service;
 
-import com.deigo.hotel.infrastructure.entitys.Quarto;
-import com.deigo.hotel.infrastructure.repository.QuartoRepository;
+import com.deigo.hotel.model.Quarto;
+import com.deigo.hotel.repository.QuartoRepository;
 import org.springframework.stereotype.Service;
 
 @Service

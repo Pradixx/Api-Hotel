@@ -1,9 +1,9 @@
-package com.deigo.hotel.service;
+﻿package com.deigo.hotel.service;
 
-import com.deigo.hotel.infrastructure.entitys.Quarto;
-import com.deigo.hotel.infrastructure.entitys.Reserva;
-import com.deigo.hotel.infrastructure.repository.QuartoRepository;
-import com.deigo.hotel.infrastructure.repository.ReservaRepository;
+import com.deigo.hotel.model.Quarto;
+import com.deigo.hotel.model.Reserva;
+import com.deigo.hotel.repository.QuartoRepository;
+import com.deigo.hotel.repository.ReservaRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;

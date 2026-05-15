@@ -1,6 +1,6 @@
-package com.deigo.hotel.controller;
+﻿package com.deigo.hotel.controller;
 
-import com.deigo.hotel.infrastructure.entitys.Hospede;
+import com.deigo.hotel.model.Hospede;
 import com.deigo.hotel.service.HospedeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

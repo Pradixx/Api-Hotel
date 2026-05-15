@@ -1,4 +1,4 @@
-package com.deigo.hotel.infrastructure.entitys;
+﻿package com.deigo.hotel.model;
 
 import jakarta.persistence.*;
 import lombok.*;

@@ -1,4 +1,4 @@
-package com.deigo.hotel.infrastructure.entitys;
+﻿package com.deigo.hotel.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;

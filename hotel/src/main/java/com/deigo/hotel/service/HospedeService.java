@@ -1,7 +1,7 @@
-package com.deigo.hotel.service;
+﻿package com.deigo.hotel.service;
 
-import com.deigo.hotel.infrastructure.entitys.Hospede;
-import com.deigo.hotel.infrastructure.repository.HospedeRepository;
+import com.deigo.hotel.model.Hospede;
+import com.deigo.hotel.repository.HospedeRepository;
 import org.springframework.stereotype.Service;
 
 @Service

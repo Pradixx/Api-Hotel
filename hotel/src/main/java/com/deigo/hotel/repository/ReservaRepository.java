@@ -1,6 +1,6 @@
-package com.deigo.hotel.infrastructure.repository;
+﻿package com.deigo.hotel.repository;
 
-import com.deigo.hotel.infrastructure.entitys.Reserva;
+import com.deigo.hotel.model.Reserva;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
